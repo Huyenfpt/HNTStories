@@ -12,7 +12,7 @@ import java.sql.Date;
  */
 public class Stories {
     private int storiesId;
-    private int categoryId;
+    private Category category;
     private int accountId;
     private String title;
     private String description;
@@ -23,9 +23,9 @@ public class Stories {
     public Stories() {
     }
 
-    public Stories(int storiesId, int categoryId, int accountId, String title, String description, Date createDate, Date updateDate, String status) {
+    public Stories(int storiesId, Category category, int accountId, String title, String description, Date createDate, Date updateDate, String status) {
         this.storiesId = storiesId;
-        this.categoryId = categoryId;
+        this.category = category;
         this.accountId = accountId;
         this.title = title;
         this.description = description;
@@ -42,12 +42,12 @@ public class Stories {
         this.storiesId = storiesId;
     }
 
-    public int getCategoryId() {
-        return categoryId;
+    public Category getCategory() {
+        return category;
     }
 
-    public void setCategoryId(int categoryId) {
-        this.categoryId = categoryId;
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     public int getAccountId() {
@@ -98,6 +98,9 @@ public class Stories {
         this.status = status;
     }
 
+    
+
+ 
     
 
    

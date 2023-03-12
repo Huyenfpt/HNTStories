@@ -16,10 +16,10 @@
                 </span>
             </div>
         </div>
-        <a class="list-group-item list-group-item-action p-3 color-primary" href="content.html"><i
+        <a class="list-group-item list-group-item-action p-3 color-primary" href="/stories"><i
                 class="bi bi-table"></i> <span class="ms-1 d-sm-inline ">View
                 contents</span></a>
-        <a class="list-group-item list-group-item-action p-3 color-primary" href="add-content.html"><i class="bi bi-pencil-square"></i> <span class="ms-1 d-sm-inline">Form
+        <a class="list-group-item list-group-item-action p-3 color-primary" href="/stories/add"><i class="bi bi-pencil-square"></i> <span class="ms-1 d-sm-inline">Form
                 content</span></a>
     </div>
 </div>

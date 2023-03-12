@@ -63,7 +63,9 @@ public class AddStoriesController extends HttpServlet {
             Stories s = new Stories();
             s.setTitle(title);
             s.setAccountId(account.getId());
-            s.setCategoryId(Integer.parseInt(category));
+            Category c = new Category();
+            c.setCategoryId(Integer.parseInt(category));
+            s.setCategory(c);
             s.setCreateDate(Date.valueOf(date));
             s.setStatus(status);
             s.setDescription(description);

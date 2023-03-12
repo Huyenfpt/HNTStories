@@ -31,7 +31,7 @@ public class StoriesDao extends DBContext {
         try ( Connection connect = getConnection()) {
             ps = connect.prepareStatement(sql);
 
-            ps.setInt(1, stories.getCategoryId());
+            ps.setInt(1, stories.getCategory().getCategoryId());
             ps.setInt(2, stories.getAccountId());
             ps.setString(3, stories.getTitle());
             ps.setString(4, stories.getDescription());
@@ -58,7 +58,9 @@ public class StoriesDao extends DBContext {
             rs = ps.executeQuery();
             while (rs.next()) {
                 Stories s = new Stories();
-                s.setCategoryId(rs.getInt("category_id"));
+                Category c = new Category();
+                c.setCategoryId(rs.getInt("category_id"));
+                s.setCategory(c);
                 s.setAccountId(rs.getInt("account_id"));
                 s.setTitle(rs.getString("title"));
                 s.setDescription(rs.getString("description"));
@@ -79,7 +81,7 @@ public class StoriesDao extends DBContext {
 
         try ( Connection connect = getConnection()) {
             ps = connect.prepareStatement(sql);
-            ps.setInt(1, stories.getCategoryId());
+            ps.setInt(1, stories.getCategory().getCategoryId());
             ps.setInt(2, stories.getAccountId());
             ps.setString(3, stories.getTitle());
             ps.setString(4, stories.getDescription());
@@ -107,7 +109,40 @@ public class StoriesDao extends DBContext {
         }
     }
 
-    public static void main(String[] args) {
+    public List<Stories> listAllStories(int id) throws Exception {
+        List<Stories> list = new ArrayList<>();
+        String sql = "SELECT s.stories_id, s.title, c.category_name,s.create_date, s.update_date, s.status\n"
+                + "FROM stories s\n"
+                + "INNER JOIN category c\n"
+                + "ON c.category_id = s.category_id\n"
+                + "where s.account_id=?";
+
+        try ( Connection connection = getConnection()) {
+            ps = connection.prepareStatement(sql);
+
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Stories s = new Stories();
+                Category c = new Category();
+                s.setStoriesId(rs.getInt("stories_id"));
+                s.setTitle(rs.getString("title"));
+                c.setCategoryName(rs.getString("category_name"));
+                s.setCategory(c);
+                s.setCreateDate(rs.getDate("create_date"));
+                s.setUpdateDate(rs.getDate("update_date"));
+                if (rs.getString("status").equals("1")) {
+                    s.setStatus("Public");
+                } else {
+                    s.setStatus("Private");
+                }
+                list.add(s);
+            }
+        }
+        return list;
+    }
+
+    public static void main(String[] args) throws Exception {
         Stories c = new Stories();
         StoriesDao dao = new StoriesDao();
 //
@@ -121,13 +156,13 @@ public class StoriesDao extends DBContext {
 //        c.setUpdateDate(Date.valueOf(LocalDate.now()));
 //        c.setStatus("day la status ne");
 //        dao.addStoriesByAccount(c);
-     
+
         //test list: oke
         //dao.findStoriesByCategoryId(1).forEach(System.out::println);
-        
         //testdelete: oke
         //dao.deleteByStoriesId(1);
-
+        
+        System.out.println(dao.listAllStories(1));
     }
 
 }
