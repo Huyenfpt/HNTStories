@@ -9,7 +9,7 @@
     <div class="container-fluid">
         <div class="navbar-brand">
             <button class="btn btn-light" id="sidebarToggle"><span class="navbar-toggler-icon"></span></button>
-            <a href="#" class="text-decoration-none text-black">CMS</a>
+            <a href="#" class="text-decoration-none text-black">HNTStories</a>
         </div>
         <li class="list-inline-item mb-0 ms-1">
             <div class="dropdown dropdown-primary">

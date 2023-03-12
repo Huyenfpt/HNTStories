@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,7 +13,7 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
+        <title>Add Stories</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/styles.css">
@@ -31,22 +32,41 @@
                             <h3 class="card-title fs-6">Content form elements</h3>
                         </div>
                         <div class="card-body">
-                            <p id="content"></p>
-                            <form action="#" method="post" id="myForm">
+                            <p id="content">${error}</p>
+                            <form action="/stories/add" method="post" id="myForm">
                                 <div class="form-group">
                                     <label for="Title">Title</label>
                                     <input type="text" name="title" class="form-control mb-3" id="title"
                                            placeholder="Enter the title" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="Brief">Brief</label>
-                                    <textarea class="form-control mb-3" id="brief"></textarea>
+                                    <label for="Brief">Category</label>
+                                    <select class="form-control mb-3" name="category" >
+                                        <c:forEach items="${category}" var="c">
+                                            <option value="${c.categoryId}">${c.categoryName}</option>
+                                        </c:forEach>
+                                    </select>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-6">
+                                        <label for="Brief">Status</label>
+                                        <select class="form-control mb-3" name="status" >
+                                            <option id="">Public</option>
+                                            <option id="">Private</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-6">
+                                        <label for="Brief">Date create</label>
+                                        <input type="date" name="createDate" class="form-control mb-3">
+                                    </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="Content">Content</label>
-                                    <textarea style="height: 200px;" id="describe" name="describe" ></textarea>
+                                    <label for="Content">Description</label>
+                                    <textarea style="height: 200px;" id="describe" name="description" ></textarea>
                                 </div>
-                                <button type="button" class="btn btn-success" onclick="checkContent()">Submit button</button>
+                                <br>
+                                <button type="submit" class="btn btn-success">Submit button</button>
                                 <button type="button" class="btn btn-success" onclick="clearForm()">Reset button</button>
                             </form>
                         </div>
@@ -56,10 +76,10 @@
         </div>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script>
-            var editor = '';
-            $(document).ready(function () {
-                editor = CKEDITOR.replace('describe');
-            });
+                                    var editor = '';
+                                    $(document).ready(function () {
+                                        editor = CKEDITOR.replace('describe');
+                                    });
         </script>
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
