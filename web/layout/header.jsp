@@ -22,7 +22,7 @@
                             class="mb-0 d-inline-block me-1"><i class="bi bi-person-fill"></i></span> User
                         profile</a>
                     <div class="dropdown-divider border-top"></div>
-                    <a class="dropdown-item text-dark" href="login.html"><span
+                    <a class="dropdown-item text-dark" href="/login"><span
                             class="mb-0 d-inline-block me-1"><i class="bi bi-box-arrow-right"></i></span>
                         Logout</a>
                 </div>

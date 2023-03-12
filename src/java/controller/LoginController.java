@@ -51,7 +51,7 @@ public class LoginController extends HttpServlet {
             req.setAttribute("error", error);
             req.getRequestDispatcher("login.jsp").forward(req, resp);
         } else {
-            resp.sendRedirect("home");
+            resp.sendRedirect("/stories");
         }
     }
 
